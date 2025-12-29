@@ -9,7 +9,7 @@ public abstract class Request
     public Guid Id { get; protected set; }
     public RequestStatus Status { get; protected set; }
 
-    public abstract decimal CostCalculation();
+    public abstract decimal CostCalculation(UrgencyLevel level);
 
     public abstract void Processing();
 }

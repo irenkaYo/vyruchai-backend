@@ -7,22 +7,29 @@ using System.Threading.Tasks;
 public class TechRepair : Request
 {
     private decimal price = 100;
-    private decimal allPersentage = 100;
-    private decimal persentageForOneWeek = 20;
-    private 
+    private decimal allPercentage = 100;
+    private decimal percentageForOneWeek = 20;
+    private decimal percentageForOneHour = 50;
     public override decimal CostCalculation(UrgencyLevel level)
     {
         if (UrgencyLevel.WhenReady == level)
         {
             return price;
         }
-        else
+        else if (UrgencyLevel.InOneWeek == level)
         {
-            if (UrgencyLevel.InOneWeek == level)
-            {
-                return price * (allPersentage + persentageForOneWeek)/allPersentage;
-            }
+            return price * (allPercentage + percentageForOneWeek) / allPercentage;
         }
+        else if (UrgencyLevel.InOneHour == level)
+        {
+            return price * (allPercentage + percentageForOneHour) / allPercentage;
+        }
+        throw new Exception("");
     }
-}
 
+    public override void Processing()
+    {
+
+    }
+
+}

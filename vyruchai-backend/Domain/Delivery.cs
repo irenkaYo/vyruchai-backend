@@ -4,9 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vyruchai_backend.Domain
+public class Delivery : Request
 {
-    internal class Delivery
+    public decimal sumForDelivery { get; private set; }
+    private decimal sumForFreeDelivery = 50;
+    private decimal sumOfDelivery = 20;
+    public override decimal CostCalculation(UrgencyLevel level)
     {
+        if (sumForDelivery >= sumForFreeDelivery)
+        {
+            return sumForDelivery;
+        }
+        else
+        {
+            return sumOfDelivery + sumForDelivery;
+        }
+    }
+
+    public override void Processing()
+    {
+
     }
 }
+
