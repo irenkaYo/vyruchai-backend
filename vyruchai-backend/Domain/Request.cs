@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 public abstract class Request
 {
+    //добавить тип мастера?
     public Guid Id { get; protected set; }
     public RequestStatus Status { get; protected set; }
 

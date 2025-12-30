@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 class TechMaster : IMaster
 {
-    public MasterStatus Status { get; set; } = MasterStatus.IsFree;
+    public MasterStatus Status { get; protected set; }
+    public string Name { get; protected set; }
+    public TechMaster(string name)
+    {
+        Status = MasterStatus.IsFree;
+        Name = name;
+    }
 
     public void TakeRequest()
     {
@@ -15,8 +21,19 @@ class TechMaster : IMaster
 
     public void CompleteRequest()
     {
-        Status = MasterStatus.IsBusy;
+        Status = MasterStatus.IsFree;
     }
 
+    public bool CanHandle(Request request)
+    {
+        if (request is TechRepair && Status == MasterStatus.IsFree)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
 

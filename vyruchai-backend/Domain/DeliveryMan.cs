@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-enum MasterStatus
+public class DeliveryMan
 {
-    IsBusy,
-    IsFree
+
 }
