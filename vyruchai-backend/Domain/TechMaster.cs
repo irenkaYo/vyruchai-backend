@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 class TechMaster : IMaster
 {
-    public MasterStatus Status { get; protected set; }
-    public string Name { get; protected set; }
+    public MasterStatus Status { get; set; }
+    public string Name { get; set; }
     public TechMaster(string name)
     {
         Status = MasterStatus.IsFree;
