@@ -28,6 +28,7 @@ public class DeliveryMan : IMaster
     {
         if (request is Delivery && Status == MasterStatus.IsFree)
         {
+            TakeRequest();
             return true;
         }
         else

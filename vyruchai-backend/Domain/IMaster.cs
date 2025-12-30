@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-interface IMaster
+public interface IMaster
 {
     public MasterStatus Status { get; protected set; }
     public string Name { get; protected set; }
-    public void TakeRequest();
+
+    protected void TakeRequest();
 
     public void CompleteRequest();
 

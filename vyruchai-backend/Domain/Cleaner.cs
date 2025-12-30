@@ -28,6 +28,7 @@ class Cleaner : IMaster
     {
         if (request is Cleaning && Status == MasterStatus.IsFree)
         {
+            TakeRequest();
             return true;
         }
         else

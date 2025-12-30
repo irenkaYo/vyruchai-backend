@@ -8,6 +8,12 @@ public class Cleaning : Request
 {
     public decimal areaOfSquareMeter { get; private set; }
     private decimal priceForOneSquareMeter = 8;
+
+    public Cleaning()
+    {
+        Id = Guid.NewGuid();
+        Status = RequestStatus.Created;
+    }
     public override decimal CostCalculation(UrgencyLevel level)
     {
         return areaOfSquareMeter * priceForOneSquareMeter;

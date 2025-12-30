@@ -10,6 +10,12 @@ public class TechRepair : Request
     private decimal allPercentage = 100;
     private decimal percentageForOneWeek = 20;
     private decimal percentageForOneHour = 50;
+
+    public TechRepair()
+    {
+        Id = Guid.NewGuid();
+        Status = RequestStatus.Created;
+    }
     public override decimal CostCalculation(UrgencyLevel level)
     {
         if (UrgencyLevel.WhenReady == level)
@@ -27,9 +33,5 @@ public class TechRepair : Request
         throw new Exception("");
     }
 
-    public override void Processing()
-    {
-
-    }
 
 }

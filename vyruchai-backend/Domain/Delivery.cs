@@ -9,6 +9,12 @@ public class Delivery : Request
     public decimal sumForDelivery { get; private set; }
     private decimal sumForFreeDelivery = 50;
     private decimal sumOfDelivery = 20;
+
+    public Delivery()
+    {
+        Id = Guid.NewGuid();
+        Status = RequestStatus.Created;
+    }
     public override decimal CostCalculation(UrgencyLevel level)
     {
         if (sumForDelivery >= sumForFreeDelivery)
