@@ -18,9 +18,4 @@ public class Cleaning : Request
     {
         return areaOfSquareMeter * priceForOneSquareMeter;
     }
-
-    public override void Processing()
-    {
-
-    }
 }

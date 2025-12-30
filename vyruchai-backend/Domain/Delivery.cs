@@ -26,10 +26,5 @@ public class Delivery : Request
             return sumOfDelivery + sumForDelivery;
         }
     }
-
-    public override void Processing()
-    {
-
-    }
 }
 

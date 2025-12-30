@@ -32,6 +32,4 @@ public class TechRepair : Request
         }
         throw new Exception("");
     }
-
-
 }

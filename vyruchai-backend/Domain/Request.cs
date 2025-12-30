@@ -25,5 +25,4 @@ public abstract class Request
     {
         Status = RequestStatus.Done;
     }
-
 }

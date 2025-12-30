@@ -37,6 +37,5 @@ public class CentralService
         master.CompleteRequest();
         request.CompletedByMaster();
     }
-    
 }
 
