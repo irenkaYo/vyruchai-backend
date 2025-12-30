@@ -6,11 +6,24 @@ using System.Threading.Tasks;
 
 public abstract class Request
 {
-    //добавить тип мастера?
     public Guid Id { get; protected set; }
     public RequestStatus Status { get; protected set; }
 
     public abstract decimal CostCalculation(UrgencyLevel level);
 
-    public abstract void Processing();
+    public void CancelRequest()
+    {
+        Status = RequestStatus.Canceled;
+    }
+
+    public void AcceptedByMaster()
+    {
+        Status = RequestStatus.InWork;
+    }
+
+    public void CompletedByMaster()
+    {
+        Status = RequestStatus.Done;
+    }
+
 }
