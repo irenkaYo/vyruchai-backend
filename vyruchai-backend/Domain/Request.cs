@@ -8,6 +8,7 @@ public abstract class Request
 {
     public Guid Id { get; protected set; }
     public RequestStatus Status { get; protected set; }
+    public IMaster Master { get; protected set; }
 
     public abstract decimal CostCalculation(UrgencyLevel level);
 
@@ -16,9 +17,10 @@ public abstract class Request
         Status = RequestStatus.Canceled;
     }
 
-    public void AcceptedByMaster()
+    public void AcceptedByMaster(IMaster master)
     {
         Status = RequestStatus.InWork;
+        Master = master;
     }
 
     public void CompletedByMaster()

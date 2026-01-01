@@ -15,32 +15,49 @@ public class CentralService
         requests = new List<Request>();
         masters = new List<IMaster>();
     }
-    public void CreateRequest(Request request)
+    public void AddRequest(Request request)
     {
         requests.Add(request);
     }
 
-    public void CreateMaster(IMaster master)
+    public void AddMaster(IMaster master)
     {
         masters.Add(master);
     }
 
-    public void TakeOneRequest(Request request, IMaster master)
+    public RequestStatus GetRequestStatus(Guid id)
     {
-        if (master.CanHandle(request) == true)
-        {
-            request.AcceptedByMaster();
-            master.TakeRequest();
-        }
-        else
-        {
-            request.CancelRequest();
-        }
+         return GetRequestById(id).Status;
     }
 
-    public void CompleteRequestByMaster(Request request, IMaster master)
+    public Request GetRequestById(Guid id)
     {
-        master.CompleteRequest();
+        foreach(Request request in requests)
+        {
+            if (request.Id == id)
+                return request;
+        }
+        throw new Exception("There is no requests with this ID");
+    }
+    public bool TakeRequest(Request request)
+    {
+        foreach (IMaster master in masters)
+        {
+            if (master.CanHandle(request) == true)
+            {
+                AddRequest(request);
+                request.AcceptedByMaster(master);
+                master.TakeRequest();
+                return true;
+            }
+        }
+        request.CancelRequest();
+        return false;
+    }
+
+    public void CompleteRequest(Request request)
+    {
+        request.Master.CompleteRequest();
         request.CompletedByMaster();
     }
 }
