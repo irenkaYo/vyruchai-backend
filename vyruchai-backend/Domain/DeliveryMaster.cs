@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class DeliveryMan : IMaster
+public class DeliveryMaster : IMaster
 {
     public MasterStatus Status { get; set; }
     public string Name { get; set; }
 
-    public DeliveryMan(string name)
+    public DeliveryMaster(string name)
     {
         Name = name;
         Status = MasterStatus.IsFree;
@@ -28,7 +28,6 @@ public class DeliveryMan : IMaster
     {
         if (request is Delivery && Status == MasterStatus.IsFree)
         {
-            TakeRequest();
             return true;
         }
         else

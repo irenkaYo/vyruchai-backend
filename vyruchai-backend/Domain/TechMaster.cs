@@ -28,7 +28,6 @@ class TechMaster : IMaster
     {
         if (request is TechRepair && Status == MasterStatus.IsFree)
         {
-            TakeRequest();
             return true;
         }
         else

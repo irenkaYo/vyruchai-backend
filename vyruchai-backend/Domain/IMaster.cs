@@ -9,7 +9,7 @@ public interface IMaster
     public MasterStatus Status { get; protected set; }
     public string Name { get; protected set; }
 
-    protected void TakeRequest();
+    public void TakeRequest();
 
     public void CompleteRequest();
 

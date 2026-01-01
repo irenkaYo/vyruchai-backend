@@ -25,6 +25,7 @@ public class CentralService
         if (master.CanHandle(request) == true)
         {
             request.AcceptedByMaster();
+            master.TakeRequest();
         }
         else
         {
