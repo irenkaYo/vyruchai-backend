@@ -7,17 +7,22 @@ using System.Threading.Tasks;
 
 public class CentralService
 {
-    private List<Request> Requests = new List<Request>();
-    private List<IMaster> Masters = new List<IMaster>();
+    private List<Request> requests;
+    private List<IMaster> masters;
 
+    public CentralService()
+    {
+        requests = new List<Request>();
+        masters = new List<IMaster>();
+    }
     public void CreateRequest(Request request)
     {
-        Requests.Add(request);
+        requests.Add(request);
     }
 
     public void CreateMaster(IMaster master)
     {
-        Masters.Add(master);
+        masters.Add(master);
     }
 
     public void TakeOneRequest(Request request, IMaster master)
