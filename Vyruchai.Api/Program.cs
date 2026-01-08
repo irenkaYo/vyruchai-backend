@@ -15,15 +15,19 @@ app.MapPost("take_request", (TakeRequestDto requestDto) =>
     Request request;
     if (requestDto.RequestType == "delivery")
     {
-        request = new Delivery(); 
+        decimal sum = decimal.Parse(requestDto.Parameters[0]);
+        request = new Delivery(sum); 
     }
     else if (requestDto.RequestType == "cleaning")
     {
-        request = new Cleaning();
+        decimal square = decimal.Parse(requestDto.Parameters[0]);
+        request = new Cleaning(square);
     }
     else if (requestDto.RequestType == "techrepair")
     {
-        request = new TechRepair();
+        string content = requestDto.Parameters[0];
+        UrgencyLevel level = (UrgencyLevel)Enum.Parse(typeof(UrgencyLevel), requestDto.Parameters[1]);
+        request = new TechRepair(content, level);
     }
     else
     {
@@ -32,7 +36,8 @@ app.MapPost("take_request", (TakeRequestDto requestDto) =>
     bool success = service.TakeRequest(request);
     if (success)
     {
-        TakeRequestResponseDto response = new TakeRequestResponseDto(request.Id, request.Master.Name, request.Status);
+        decimal result = request.CostCalculation();
+        TakeRequestResponseDto response = new TakeRequestResponseDto(request.Id, request.Master.Name, request.Status, result);
         return response; 
     }
     else

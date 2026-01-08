@@ -4,6 +4,15 @@ public class TakeRequestResponseDto
     public Guid Id { get; set; }
     public string Name { get; set; }
     public string Status { get; set; }
+    public decimal Sum { get; set; }
+
+    public TakeRequestResponseDto(Guid id, string name, RequestStatus status, decimal sum)
+    {
+        Id = id;
+        Name = name;
+        Status = status.ToString();
+        Sum = sum;
+    }
 
     public TakeRequestResponseDto(Guid id, string name, RequestStatus status)
     {

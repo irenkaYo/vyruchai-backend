@@ -10,7 +10,7 @@ public abstract class Request
     public RequestStatus Status { get; protected set; }
     public IMaster Master { get; protected set; }
 
-    public abstract decimal CostCalculation(UrgencyLevel level);
+    public abstract decimal CostCalculation();
 
     public void CancelRequest()
     {
