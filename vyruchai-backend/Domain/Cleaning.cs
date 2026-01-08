@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 public class Cleaning : Request
 {
-    public decimal AreaOfSquareMeter { get; private set; }
+    public decimal AreaOfApartment { get; private set; }
     private decimal priceForOneSquareMeter = 8;
 
     public Cleaning(decimal areaOfSquareMeter)
     {
         Id = Guid.NewGuid();
         Status = RequestStatus.Created;
-        AreaOfSquareMeter = areaOfSquareMeter;
+        AreaOfApartment = areaOfSquareMeter;
     }
     public override decimal CostCalculation(UrgencyLevel level)
     {
-        return AreaOfSquareMeter * priceForOneSquareMeter;
+        return AreaOfApartment * priceForOneSquareMeter;
     }
 }
