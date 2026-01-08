@@ -15,15 +15,18 @@ app.MapPost("take_request", (TakeRequestDto requestDto) =>
     Request request;
     if (requestDto.RequestType == "delivery")
     {
-        request = new Delivery(); 
+        decimal sum = decimal.Parse(requestDto.Parameters[0]);
+        request = new Delivery(sum); 
     }
     else if (requestDto.RequestType == "cleaning")
     {
-        request = new Cleaning();
+        decimal square = decimal.Parse(requestDto.Parameters[0]);
+        request = new Cleaning(square);
     }
     else if (requestDto.RequestType == "techrepair")
     {
-        request = new TechRepair();
+        string content = requestDto.Parameters[0];
+        request = new TechRepair(content);
     }
     else
     {

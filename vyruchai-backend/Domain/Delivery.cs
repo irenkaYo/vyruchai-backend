@@ -6,24 +6,25 @@ using System.Threading.Tasks;
 
 public class Delivery : Request
 {
-    public decimal sumForDelivery { get; private set; }
+    public decimal SumForDelivery { get; private set; }
     private decimal sumForFreeDelivery = 50;
     private decimal sumOfDelivery = 20;
 
-    public Delivery()
+    public Delivery(decimal sumForDelivery)
     {
         Id = Guid.NewGuid();
         Status = RequestStatus.Created;
+        SumForDelivery = sumForDelivery;
     }
     public override decimal CostCalculation(UrgencyLevel level)
     {
-        if (sumForDelivery >= sumForFreeDelivery)
+        if (SumForDelivery >= sumForFreeDelivery)
         {
-            return sumForDelivery;
+            return SumForDelivery;
         }
         else
         {
-            return sumOfDelivery + sumForDelivery;
+            return sumOfDelivery + SumForDelivery;
         }
     }
 }
