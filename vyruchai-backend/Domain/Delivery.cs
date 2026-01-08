@@ -16,7 +16,7 @@ public class Delivery : Request
         Status = RequestStatus.Created;
         SumForDelivery = sumForDelivery;
     }
-    public override decimal CostCalculation(UrgencyLevel level)
+    public override decimal CostCalculation()
     {
         if (SumForDelivery >= sumForFreeDelivery)
         {

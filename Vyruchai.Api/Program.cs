@@ -13,7 +13,6 @@ app.MapGet("get_request_info/{id:guid}", (Guid id) =>
 app.MapPost("take_request", (TakeRequestDto requestDto) =>
 {
     Request request;
-    UrgencyLevel level = UrgencyLevel.WhenReady;
     if (requestDto.RequestType == "delivery")
     {
         decimal sum = decimal.Parse(requestDto.Parameters[0]);
@@ -27,7 +26,7 @@ app.MapPost("take_request", (TakeRequestDto requestDto) =>
     else if (requestDto.RequestType == "techrepair")
     {
         string content = requestDto.Parameters[0];
-        level = (UrgencyLevel)Enum.Parse(typeof(UrgencyLevel), requestDto.Parameters[1]);
+        UrgencyLevel level = (UrgencyLevel)Enum.Parse(typeof(UrgencyLevel), requestDto.Parameters[1]);
         request = new TechRepair(content, level);
     }
     else
@@ -37,7 +36,7 @@ app.MapPost("take_request", (TakeRequestDto requestDto) =>
     bool success = service.TakeRequest(request);
     if (success)
     {
-        decimal result = request.CostCalculation(level);
+        decimal result = request.CostCalculation();
         TakeRequestResponseDto response = new TakeRequestResponseDto(request.Id, request.Master.Name, request.Status, result);
         return response; 
     }

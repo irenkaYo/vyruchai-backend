@@ -20,17 +20,17 @@ public class TechRepair : Request
         Content = content;
         Level = level;
     }
-    public override decimal CostCalculation(UrgencyLevel level)
+    public override decimal CostCalculation()
     {
-        if (UrgencyLevel.WhenReady == level)
+        if (UrgencyLevel.WhenReady == Level)
         {
             return price;
         }
-        else if (UrgencyLevel.InOneWeek == level)
+        else if (UrgencyLevel.InOneWeek == Level)
         {
             return price * (allPercentage + percentageForOneWeek) / allPercentage;
         }
-        else if (UrgencyLevel.InOneHour == level)
+        else if (UrgencyLevel.InOneHour == Level)
         {
             return price * (allPercentage + percentageForOneHour) / allPercentage;
         }

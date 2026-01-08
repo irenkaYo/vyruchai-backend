@@ -15,7 +15,7 @@ public class Cleaning : Request
         Status = RequestStatus.Created;
         AreaOfApartment = areaOfSquareMeter;
     }
-    public override decimal CostCalculation(UrgencyLevel level)
+    public override decimal CostCalculation()
     {
         return AreaOfApartment * priceForOneSquareMeter;
     }
