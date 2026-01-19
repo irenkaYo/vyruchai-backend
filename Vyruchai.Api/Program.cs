@@ -3,7 +3,9 @@ var app = builder.Build();
 
 var service = new CentralService();
 var master = new DeliveryMaster("Попа");
+var master2 = new TechMaster("okak");
 service.AddMaster(master);
+service.AddMaster(master2);
 app.MapGet("get_request_info/{id:guid}", (Guid id) =>
 {
     RequestStatus status = service.GetRequestStatus(id);
@@ -15,7 +17,8 @@ app.MapPost("take_request", (TakeRequestDto requestDto) =>
     Request request;
     if (requestDto.RequestType == "delivery")
     {
-        decimal sum = decimal.Parse(requestDto.Parameters[0]);
+        decimal sum;
+        decimal.TryParse(requestDto.Parameters[0], out sum);
         request = new Delivery(sum); 
     }
     else if (requestDto.RequestType == "cleaning")

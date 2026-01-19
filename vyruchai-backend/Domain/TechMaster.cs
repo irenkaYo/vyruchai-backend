@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class TechMaster : IMaster
+public class TechMaster : IMaster
 {
     public MasterStatus Status { get; set; }
     public string Name { get; set; }
