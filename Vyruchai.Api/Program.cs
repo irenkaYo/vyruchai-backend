@@ -17,9 +17,8 @@ app.MapPost("take_request", (TakeRequestDto requestDto) =>
     Request request;
     if (requestDto.RequestType == "delivery")
     {
-        decimal sum;
-        decimal.TryParse(requestDto.Parameters[0], out sum);
-        request = new Delivery(sum); 
+        decimal sum = decimal.Parse(requestDto.Parameters[0]);
+        request = new Delivery(sum);
     }
     else if (requestDto.RequestType == "cleaning")
     {
@@ -41,7 +40,7 @@ app.MapPost("take_request", (TakeRequestDto requestDto) =>
     {
         decimal result = request.CostCalculation();
         TakeRequestResponseDto response = new TakeRequestResponseDto(request.Id, request.Master.Name, request.Status, result);
-        return response; 
+        return response;
     }
     else
     {
