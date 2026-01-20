@@ -2,10 +2,12 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 var service = new CentralService();
-var master = new DeliveryMaster("Попа");
-var master2 = new TechMaster("okak");
+var master = new DeliveryMaster("Ponchik");
+var master2 = new TechMaster("Bob");
+var master3 = new Cleaner("Kit");
 service.AddMaster(master);
 service.AddMaster(master2);
+service.AddMaster(master3);
 app.MapGet("get_request_info/{id:guid}", (Guid id) =>
 {
     RequestStatus status = service.GetRequestStatus(id);

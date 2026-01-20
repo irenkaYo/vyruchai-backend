@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-class Cleaner : IMaster
+public class Cleaner : IMaster
 {
     public MasterStatus Status { get; set; }
     public string Name { get; set; }
