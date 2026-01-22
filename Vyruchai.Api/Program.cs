@@ -2,8 +2,12 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
 var service = new CentralService();
-var master = new DeliveryMaster("Попа");
+var master = new DeliveryMaster("Ponchik");
+var master2 = new TechMaster("Bob");
+var master3 = new Cleaner("Kit");
 service.AddMaster(master);
+service.AddMaster(master2);
+service.AddMaster(master3);
 app.MapGet("get_request_info/{id:guid}", (Guid id) =>
 {
     RequestStatus status = service.GetRequestStatus(id);
@@ -15,15 +19,19 @@ app.MapPost("take_request", (TakeRequestDto requestDto) =>
     Request request;
     if (requestDto.RequestType == "delivery")
     {
-        request = new Delivery(); 
+        decimal sum = decimal.Parse(requestDto.Parameters[0]);
+        request = new Delivery(sum);
     }
     else if (requestDto.RequestType == "cleaning")
     {
-        request = new Cleaning();
+        decimal square = decimal.Parse(requestDto.Parameters[0]);
+        request = new Cleaning(square);
     }
     else if (requestDto.RequestType == "techrepair")
     {
-        request = new TechRepair();
+        string content = requestDto.Parameters[0];
+        UrgencyLevel level = (UrgencyLevel)Enum.Parse(typeof(UrgencyLevel), requestDto.Parameters[1]);
+        request = new TechRepair(content, level);
     }
     else
     {
@@ -32,8 +40,9 @@ app.MapPost("take_request", (TakeRequestDto requestDto) =>
     bool success = service.TakeRequest(request);
     if (success)
     {
-        TakeRequestResponseDto response = new TakeRequestResponseDto(request.Id, request.Master.Name, request.Status);
-        return response; 
+        decimal result = request.CostCalculation();
+        TakeRequestResponseDto response = new TakeRequestResponseDto(request.Id, request.Master.Name, request.Status, result);
+        return response;
     }
     else
     {

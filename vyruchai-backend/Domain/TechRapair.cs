@@ -6,27 +6,31 @@ using System.Threading.Tasks;
 
 public class TechRepair : Request
 {
+    public string Content {  get; set; }
+    public UrgencyLevel Level { get; set; }
     private decimal price = 100;
     private decimal allPercentage = 100;
     private decimal percentageForOneWeek = 20;
     private decimal percentageForOneHour = 50;
 
-    public TechRepair()
+    public TechRepair(string content, UrgencyLevel level)
     {
         Id = Guid.NewGuid();
         Status = RequestStatus.Created;
+        Content = content;
+        Level = level;
     }
-    public override decimal CostCalculation(UrgencyLevel level)
+    public override decimal CostCalculation()
     {
-        if (UrgencyLevel.WhenReady == level)
+        if (UrgencyLevel.WhenReady == Level)
         {
             return price;
         }
-        else if (UrgencyLevel.InOneWeek == level)
+        else if (UrgencyLevel.InOneWeek == Level)
         {
             return price * (allPercentage + percentageForOneWeek) / allPercentage;
         }
-        else if (UrgencyLevel.InOneHour == level)
+        else if (UrgencyLevel.InOneHour == Level)
         {
             return price * (allPercentage + percentageForOneHour) / allPercentage;
         }
